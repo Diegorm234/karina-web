@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Para Karina ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+    }
+
+    .intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #e3f2fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 1s ease;
+    }
+
+    .heart-start {
+      font-size: 100px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      color: #5c6bc0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .fall {
+      animation: fallHeart 1.5s ease-in forwards;
+    }
+
+    @keyframes fallHeart {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    .content {
+      opacity: 0;
+      transition: opacity 1s ease;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+      background-image: url('fondo.jpg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: #5c6bc0;
+      flex-grow: 1;
+    }
+
+    .message-box {
+      width: 45%;
+      text-align: left;
+      font-size: 1em;
+      color: #2e3c6e;
+      white-space: pre-wrap;
+      padding-left: 50px;
+      height: 80%;
+      margin-top: -80px;  
+      overflow: hidden;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .message-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 2px;
+      height: 100%;
+      background: black;
+      opacity: 0.6;
+    }
+
+    .tree-container {
+      width: 45%;
+      text-align: center;
+      transform: scale(1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #5c6bc0;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 2px white;
+    }
+
+    .contador-label {
+      font-size: 1.4em;
+      color: #5c6bc0;
+      margin-top: 20px;
+      text-shadow: 1px 1px 1px white;
+    }
+
+    .counter {
+      font-size: 1.3em;
+      color: #2e3c6e;
+      margin-top: 5px;
+      font-weight: 600;
+      text-shadow: 1px 1px 1px white;
+    }
+
+    .tree-gif {
+      width: 320px;
+      height: auto;
+      border: none;
+      display: block;
+      margin: 0 auto;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .heart-fall {
+      position: absolute;
+      top: -50px;
+      font-size: 20px;
+      color: #f6d4e3;
+      animation: fallHeartVar 5s linear infinite;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes fallHeartVar {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(50vh) rotate(180deg); opacity: 0.8; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .linea-final {
+      width: 60%;
+      height: 2px;
+      background: black;
+      margin-top: 30px;
+      opacity: 0.6;
+    }
+
+    .imagen-esquina {
+      position: fixed;
+      bottom: -25px;
+      left: 0;
+      width: 240px;
+      height: auto;
+      z-index: 20;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="intro" id="intro">
+    <div class="heart-start" id="heart">❤️</div>
+  </div>
+
+  <div class="content" id="mainContent">
+    <div class="message-box" id="carta"></div>
+
+    <div class="tree-container">
+      <h1>Para la niña más hermosa del mundo, kari ❤️</h1>
+      <img src="ezgif.com-animated-gif-maker.gif" alt="Gif Animado" class="tree-gif" />
+      <div class="contador-label">Gracias por tan bellos momentos. Mi amor por ti comenzó hace...</div>
+      <div class="counter" id="contador"></div>
+      <div class="linea-final"></div>
+    </div>
+
+    <audio id="musica" loop>
+      <source src="stevelacy-darkred.mp3" type="audio/mpeg" />
+    </audio>
+  </div>
+
+  <!-- Imagen decorativa en la esquina inferior izquierda -->
+  <img src="nueva.png" alt="Decoración" class="imagen-esquina" />
+
+  <script>
+    const heart = document.getElementById('heart');
+    const intro = document.getElementById('intro');
+    const mainContent = document.getElementById('mainContent');
+    const musica = document.getElementById('musica');
+    const carta = document.getElementById('carta');
+
+    
+const mensaje = [
+  "Hola, mi niña 🩷",
+  "El tiempo a tu lado se me ha pasado volando. Aún me cuesta creer que llevamos ya 4 años juntos.",
+  "Sin duda han sido los mejores hasta ahora. Contigo a mi lado estoy seguro de que nunca me sentiré triste,",
+  "enojado o desesperanzado, porque contigo lo tengo todo y no necesito nada más.",
+  "En serio, me cuesta creer que sigues conmigo... es como si mi sueño se hiciera realidad.",
+  "Estoy eternamente agradecido contigo. Me salvaste una y mil veces, en momentos en los que no me sentía bien.",
+  "Eres una mujer increíble, niña. Siempre voy a estar orgulloso de ti, así sea por la más mínima cosa.",
+  "No sabes cuánto significa eso para mí, porque todo lo que haces me parece maravilloso.",
+  "Ojalá la vida me dé la oportunidad de seguir mi futuro a tu lado. Y si es así, te prometo que no te arrepentirás.",
+  "Desde el fondo de mi corazón, estoy locamente enamorado de ti. Quiero todo contigo,",
+  "y te seguiré amando como si fuera el primer mes... aunque pasen 10 años.",
+  "Mi corazón está donde tú estás. En serio, te amo, mi niña.",
+  "Eres lo mejor. Nunca dudes de mi amor.",
+  "Att: Diego 💌"
+];
+    
+
+    let renglon = 0;
+    function escribirLetraPorLetra(texto, callback) {
+      let i = 0;
+      function escribir() {
+        if (i < texto.length) {
+          carta.innerHTML += texto[i];
+          i++;
+          setTimeout(escribir, 50);
+        } else {
+          carta.innerHTML += "\n";
+          callback();
+        }
+      }
+      escribir();
+    }
+
+    function escribirCarta() {
+      if (renglon < mensaje.length) {
+        escribirLetraPorLetra(mensaje[renglon], () => {
+          renglon++;
+          setTimeout(escribirCarta, 500);
+        });
+      }
+    }
+
+    function lanzarCorazones() {
+      const heart = document.createElement('div');
+      heart.className = 'heart-fall';
+      heart.textContent = ['❤️','🩵','🩷','🤍'][Math.floor(Math.random()*4)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    heart.addEventListener('click', () => {
+      heart.classList.add('fall');
+      setTimeout(() => {
+        intro.style.opacity = '0';
+        setTimeout(() => {
+          intro.style.display = 'none';
+          mainContent.style.opacity = '1';
+          musica.play();
+          escribirCarta();
+          setInterval(lanzarCorazones, 700);
+        }, 1000);
+      }, 1400);
+    });
+
+    const fechaInicio = new Date("2021-03-30T00:00:00");
+    const contador = document.getElementById("contador");
+
+    function actualizarContador() {
+      const ahora = new Date();
+      const diferencia = ahora - fechaInicio;
+
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+      const segundos = Math.floor((diferencia / 1000) % 60);
+
+      contador.textContent = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    actualizarContador();
+    setInterval(actualizarContador, 1000);
+  </script>
+</body>
+</html>
